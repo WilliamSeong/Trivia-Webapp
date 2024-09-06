@@ -36,7 +36,7 @@ export default function QuestionMenu(props) {
 
     const difficulties = ["Easy", "Medium", "Hard"];
 
-    const type = ["Multiple Choice", "True / False"];
+    const type = ["Multiple Choice", "True / False", "Both"];
 
     const amounts = ["1", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50"];
 
@@ -78,8 +78,10 @@ export default function QuestionMenu(props) {
             case "Question Type":
                 if (option === "True / False") {
                     setQuestionType("boolean");
-                } else {
+                } else if(option == "Multiple Choice") {
                     setQuestionType("multiple");
+                } else {
+                    setQuestionType("");
                 }
                 break;
             case "Amount":

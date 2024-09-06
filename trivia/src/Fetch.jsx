@@ -11,7 +11,7 @@ export default function Fetch({ categoryid, difficulty, questiontype, amount }) 
 
     useEffect(() => {
         async function fetcher() {
-            console.log(`https://opentdb.com/api.php?amount=${amount}&category=${categoryid}&difficulty=${difficulty}&type=${questiontype}`)
+            // console.log(`https://opentdb.com/api.php?amount=${amount}&category=${categoryid}&difficulty=${difficulty}&type=${questiontype}`)
             const data = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=${categoryid}&difficulty=${difficulty}&type=${questiontype}`);
             const {results} = await data.json();
 

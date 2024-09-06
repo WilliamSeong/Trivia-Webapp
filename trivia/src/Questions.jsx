@@ -12,8 +12,9 @@ export default function Questions({list}) {
     const [correct, setCorrect] = useState(0);
     const [incorrect, setIncorrect] = useState(0);
     const [review, setReview] = useState([]);
+    const [results, setResults] = useState([]);
 
-    // useEffect for incrementing question
+        // useEffect for incrementing question
     useEffect(() => {
 
         setQuestion(list[index]);
@@ -33,6 +34,7 @@ export default function Questions({list}) {
         console.log("You clicked the correct answer");
         const item = list[index];
         setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
+        setResults(results => [...results, "true"]);
         setCorrect(correct+1);
         setIndex(index+1);
     }
@@ -41,9 +43,11 @@ export default function Questions({list}) {
         console.log("You clicked the wrong answer");
         const item = list[index];
         setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
+        setResults(results => [...results, "false"]);
         setIncorrect(incorrect+1);
         setIndex(index+1);
     }
+
 
     // For printing the functionality of the buttons for registering correct or incorrect choices
     // useEffect(() => {
@@ -66,7 +70,7 @@ export default function Questions({list}) {
                     <h1>Loading...</h1>
                 ) : (
                     finish ? (
-                        <Result correct={correct} incorrect={incorrect} review={review}/>
+                        <Result correct={correct} incorrect={incorrect} review={review} results={results}/>
                         ) : (
                         <>
                             <h1>{he.decode(question.question)}</h1>

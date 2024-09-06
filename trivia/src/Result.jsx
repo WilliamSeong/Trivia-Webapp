@@ -1,5 +1,6 @@
 import Styled from "styled-components";
 import he from "he";
+import ResultCard from "./ResultCard.jsx";
 
 const StyledA = Styled.a`
     text-decoration: none;
@@ -9,10 +10,11 @@ const StyledA = Styled.a`
     border-radius: 15px;
 `;
 
-export default function Result({ correct, incorrect, review }) {
+export default function Result({ correct, incorrect, review, results }) {
 
     const grade = correct/(correct+incorrect) * 100;
     console.log("review: ", { review });
+    console.log("results: ", { results });
 
     return(
         <>
@@ -21,18 +23,8 @@ export default function Result({ correct, incorrect, review }) {
             <h1>Grade: { grade }%</h1>
             <StyledA href={"./App.jsx"}>Home</StyledA>
             <h1>Questions</h1>
-            {
-                review.map((item)=> (
-                    <div key={item[0]}>
-                        <h1>{he.decode(item[0])}</h1>
-                        <h2>Correct: {he.decode(item[1])} </h2>
-                        <h2>Incorrect: { item[2].map((item) => (
-                            <h6 key={item[0]}>{ he.decode(item) }</h6>
-                        )) }</h2>
-                        <hr/>
-                    </div>
-                ))
-            }
+
+            <ResultCard review={review} results={results} />
         </>
 
     )
