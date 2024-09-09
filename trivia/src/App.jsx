@@ -5,9 +5,9 @@ import Styled, {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     :root {
-        --primary-color: #4CAF50;
+        --primary-color: black;
         --secondary-color: #FFFFFF;
-        --background-color: #282c34;
+        --background-color: #d4d9d9;
         --button-bg: #61dafb;
         --button-text: #282c34;
     }

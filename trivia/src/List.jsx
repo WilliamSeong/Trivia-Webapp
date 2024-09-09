@@ -18,7 +18,7 @@ const StyledLi = Styled.li`
 
 const StyledButton = Styled.button`
     margin: auto;
-    color: #4CAF50;
+    color: black;
     background-color: transparent;
     font-size: 3vw;
 `;
