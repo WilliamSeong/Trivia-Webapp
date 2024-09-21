@@ -36,22 +36,22 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-const StyledA = Styled.a`
-    text-decoration: none;
-    color: red;
-    display: inline-block;
-    margin-top: 20px;
-    padding: 1vh 2vw;
-    background-color: white;
-    border-radius: 15px;
-`;
+// const StyledA = Styled.a`
+//     text-decoration: none;
+//     color: red;
+//     display: inline-block;
+//     margin-top: 20px;
+//     padding: 1vh 2vw;
+//     background-color: white;
+//     border-radius: 15px;
+// `;
 
 export default function App() {
 
     return (
         <>
             <GlobalStyle />
-            <StyledA href={"./App.jsx"}>Quit</StyledA>
+            {/*<StyledA href={"./App.jsx"}>Quit</StyledA>*/}
             <QuestionMenu />
         </>
     )

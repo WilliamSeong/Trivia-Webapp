@@ -22,10 +22,10 @@ const StyledButtonText = Styled.h1`
 
 export default function QuestionMenu(props) {
 
-    const [categoryId, setCategoryId] = useState(null);
-    const [difficulty, setDifficulty] = useState(null);
-    const [questionType, setQuestionType] = useState(null);
-    const [amount, setAmount] = useState(1);
+    const [categoryId, setCategoryId] = useState("9");
+    const [difficulty, setDifficulty] = useState("easy");
+    const [questionType, setQuestionType] = useState("");
+    const [amount, setAmount] = useState("10");
     const [menu, setMenu] = useState(true);
 
     const categories = ["Any Category", "Entertainment: Books", "Entertainment: Film", "Entertainment: Music",

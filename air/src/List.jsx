@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import he from "he";
 import Styled from "styled-components";
 
-const StyledLi = Styled.li`
+const StyledLi = Styled.h5`
     list-style: none;
     margin: 1vw auto;
     width: 40vw;
@@ -66,19 +66,17 @@ export default function List({ correct, incorrect, correct_choice, incorrect_cho
     return(
 
         <>
-            <ul>
-                {
-                    // Go through the random array from before to render the choices, and depending on the bool create the NavLink
-                    // to the correct or incorrect variation of the results page
-                    answers.map((answer, index) => (
-                        answer[1] ? (
-                            <StyledLi key={index}><StyledButton onClick={correct_choice}>{ he.decode(answer[0]) }</StyledButton></StyledLi>
-                        ) : (
-                            <StyledLi key={index}><StyledButton onClick={incorrect_choice}>{he.decode(answer[0])}</StyledButton></StyledLi>
-                        )
-                    ))
-                }
-            </ul>
+            {
+                // Go through the random array from before to render the choices, and depending on the bool create the NavLink
+                // to the correct or incorrect variation of the results page
+                answers.map((answer, index) => (
+                    answer[1] ? (
+                        <StyledLi key={index}><StyledButton onClick={correct_choice}>{ he.decode(answer[0]) }</StyledButton></StyledLi>
+                    ) : (
+                        <StyledLi key={index}><StyledButton onClick={incorrect_choice}>{he.decode(answer[0])}</StyledButton></StyledLi>
+                    )
+                ))
+            }
         </>
     )
 }
