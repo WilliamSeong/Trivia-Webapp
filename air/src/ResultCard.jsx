@@ -1,11 +1,11 @@
 import he from "he";
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import Styled from "styled-components";
 
 const StyledDiv = Styled.div`
     background-color: ${props => props.theme.colors};
-    height: 50vh;
     width: 75vw;
+    height: auto;
     margin: auto;
     border-radius: 100px;
     padding: 10px;
@@ -35,9 +35,34 @@ export default function ResultCard ({review, results, progress}) {
     return (
         <>
             {
-                (results[Index] === "true") ? (
+                (review[Index][3] === "true") ? (
                     <StyledDiv theme={{colors: "#d3ffee"}}>
-                        <p>{progress}</p>
+                        <div>
+                            {
+                                progress.map((item, index) => (
+                                    <Fragment key={index} style={{margin: 0}}>
+                                        {(item === " X ") ? (
+                                            <span style={{ display: "inline-block" }}>
+                                                &nbsp;
+                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png" alt="red dot" />
+                                                &nbsp;
+                                            </span>
+                                        ) : (item === " ✓ ") ? (
+                                            <span style={{ display: "inline-block" }}>
+                                                &nbsp;
+                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png" alt="green dot" />
+                                                &nbsp;
+                                            </span>
+                                        ) : (
+                                            <span style={{ display: "inline-block" }}>
+                                                <h1>&nbsp;?&nbsp;</h1>
+                                            </span>
+                                        )}
+                                        {(index % 10 === 9) && <div style={{ clear: "both" }}></div>}
+                                    </Fragment>
+                                ))
+                            }
+                        </div>
                         <button onClick={() => Decrement()}>&lt;</button>
                         <span style={{color: "black"}}>{Index + 1}</span>
                         <button onClick={() => Increment()}>&gt;</button>
@@ -54,7 +79,32 @@ export default function ResultCard ({review, results, progress}) {
                     </StyledDiv>
                 ) : (
                     <StyledDiv theme={{colors: "#ffbfbf"}}>
-                        <p>{progress}</p>
+                        <div>
+                            {
+                                progress.map((item, index) => (
+                                    <Fragment key={index} style={{margin: 0}}>
+                                        {(item === " X ") ? (
+                                            <span style={{ display: "inline-block" }}>
+                                                &nbsp;
+                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png" alt="red dot" />
+                                                &nbsp;
+                                            </span>
+                                        ) : (item === " ✓ ") ? (
+                                            <span style={{ display: "inline-block" }}>
+                                                &nbsp;
+                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png" alt="green dot" />
+                                                &nbsp;
+                                            </span>
+                                        ) : (
+                                            <span style={{ display: "inline-block" }}>
+                                                <h1>&nbsp;?&nbsp;</h1>
+                                            </span>
+                                        )}
+                                        {(index % 10 === 9) && <div style={{ clear: "both" }}></div>}
+                                    </Fragment>
+                                ))
+                            }
+                        </div>
                         <button onClick={() => Decrement()}>&lt;</button>
                         <span style={{color: "black"}}>{Index + 1}</span>
                         <button onClick={() => Increment()}>&gt;</button>

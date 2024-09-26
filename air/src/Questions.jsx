@@ -1,5 +1,5 @@
 import List from "./List.jsx";
-import {useState, useEffect} from "react";
+import {useState, useEffect, Fragment} from "react";
 import he from "he";
 import Result from "./Result";
 import Styled from "styled-components";
@@ -65,7 +65,7 @@ export default function Questions({list}) {
             newProgress[index] = " ✓ ";
             return newProgress;
         })
-        setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
+        setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers, "true"]]);
         setResults(results => [...results, "true"]);
         setCorrect(correct+1);
         setIndex(index+1);
@@ -80,7 +80,7 @@ export default function Questions({list}) {
             newProgress[index] = " X ";
             return newProgress;
         })
-        setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
+        setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers, "false"]]);
         setResults(results => [...results, "false"]);
         setIncorrect(incorrect+1);
         setIndex(index+1);
@@ -121,7 +121,30 @@ export default function Questions({list}) {
                             <List correct={question.correct_answer} incorrect={question.incorrect_answers}
                                   correct_choice={correct_choice} incorrect_choice={incorrect_choice}/>
                             {/*<button onClick={() => setIndex(index + 1)}>Click Me</button> (Potential skip button)*/}
-                            <h1>{progress}</h1>
+                            {
+                                progress.map((item, index) => (
+                                    <Fragment key={index} style={{margin: 0}}>
+                                        {(item === " X ") ? (
+                                            <span style={{ display: "inline-block" }}>
+                                                &nbsp;
+                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png" alt="red dot" />
+                                                &nbsp;
+                                            </span>
+                                        ) : (item === " ✓ ") ? (
+                                            <span style={{ display: "inline-block" }}>
+                                                &nbsp;
+                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png" alt="green dot" />
+                                                &nbsp;
+                                            </span>
+                                        ) : (
+                                            <span style={{ display: "inline-block" }}>
+                                                <h1>&nbsp;?&nbsp;</h1>
+                                            </span>
+                                        )}
+                                        {(index % 10 === 9) && <div style={{ clear: "both" }}></div>}
+                                    </Fragment>
+                                ))
+                            }
                         </>
                     )
                 )
