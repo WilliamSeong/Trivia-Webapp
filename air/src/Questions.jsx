@@ -2,6 +2,12 @@ import List from "./List.jsx";
 import {useState, useEffect} from "react";
 import he from "he";
 import Result from "./Result";
+import Styled from "styled-components";
+
+// const StyledPage = Styled.div`
+//     border-style: solid;
+//     border-color: ${props => props.theme.colors};
+// `
 
 export default function Questions({list}) {
 
@@ -13,6 +19,8 @@ export default function Questions({list}) {
     const [incorrect, setIncorrect] = useState(0);
     const [review, setReview] = useState([]);
     const [results, setResults] = useState([]);
+    // const [state, setState] = useState("#d4d9d9")
+    const [progress, setProgress] = useState([]);
 
         // useEffect for incrementing question
     useEffect(() => {
@@ -30,9 +38,33 @@ export default function Questions({list}) {
         }
     }, [index])
 
+    // useEffect for detecting when finished
+    // useEffect(() => {
+    //     if (finish){
+    //         setState("#d4d9d9")
+    //     }
+    // })
+
+    // useEffect for populating the progress list
+    useEffect(() => {
+        let hold = [...list];
+
+        for (let i = 0; i < list.length; i++) {
+            hold[i] = " ? "
+        }
+
+        setProgress(hold);
+    }, [])
+
     function correct_choice() {
         console.log("You clicked the correct answer");
         const item = list[index];
+        // setState("#d3ffee")
+        setProgress(prevProgress => {
+            const newProgress = [...prevProgress];
+            newProgress[index] = " ✓ ";
+            return newProgress;
+        })
         setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
         setResults(results => [...results, "true"]);
         setCorrect(correct+1);
@@ -42,12 +74,23 @@ export default function Questions({list}) {
     function incorrect_choice() {
         console.log("You clicked the wrong answer");
         const item = list[index];
+        // setState("#ffbfbf")
+        setProgress(prevProgress => {
+            const newProgress = [...prevProgress];
+            newProgress[index] = " X ";
+            return newProgress;
+        })
         setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
         setResults(results => [...results, "false"]);
         setIncorrect(incorrect+1);
         setIndex(index+1);
     }
 
+    // function progress_update(res) {
+    //     if (res){
+    //
+    //     }
+    // }
 
     // For printing the functionality of the buttons for registering correct or incorrect choices
     // useEffect(() => {
@@ -64,23 +107,25 @@ export default function Questions({list}) {
     // },[])
 
     return(
-        <>
+        <div>
+            {/*theme = {{colors: state}}*/}
             {
                 loading ? (
                     <h1>Loading...</h1>
                 ) : (
                     finish ? (
-                        <Result correct={correct} incorrect={incorrect} review={review} results={results}/>
+                        <Result correct={correct} incorrect={incorrect} review={review} results={results} progress={progress} />
                         ) : (
                         <>
                             <h1>{he.decode(question.question)}</h1>
                             <List correct={question.correct_answer} incorrect={question.incorrect_answers}
                                   correct_choice={correct_choice} incorrect_choice={incorrect_choice}/>
                             {/*<button onClick={() => setIndex(index + 1)}>Click Me</button> (Potential skip button)*/}
+                            <h1>{progress}</h1>
                         </>
                     )
                 )
             }
-        </>
+        </div>
     )
 }

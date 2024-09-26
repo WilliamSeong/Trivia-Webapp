@@ -11,7 +11,7 @@ const StyledDiv = Styled.div`
     padding: 10px;
 `;
 
-export default function ResultCard ({review, results}) {
+export default function ResultCard ({review, results, progress}) {
     const [Index, setIndex] = useState(0);
 
     const len = review.length - 1;
@@ -37,7 +37,9 @@ export default function ResultCard ({review, results}) {
             {
                 (results[Index] === "true") ? (
                     <StyledDiv theme={{colors: "#d3ffee"}}>
+                        <p>{progress}</p>
                         <button onClick={() => Decrement()}>&lt;</button>
+                        <span style={{color: "black"}}>{Index + 1}</span>
                         <button onClick={() => Increment()}>&gt;</button>
                         <h1>{he.decode(review[Index][0])}</h1>
                         <h2>{he.decode(review[Index][1])}&#10004;</h2>
@@ -52,7 +54,9 @@ export default function ResultCard ({review, results}) {
                     </StyledDiv>
                 ) : (
                     <StyledDiv theme={{colors: "#ffbfbf"}}>
+                        <p>{progress}</p>
                         <button onClick={() => Decrement()}>&lt;</button>
+                        <span style={{color: "black"}}>{Index + 1}</span>
                         <button onClick={() => Increment()}>&gt;</button>
                         <h1>{he.decode(review[Index][0])}</h1>
                         <h2>{he.decode(review[Index][1])}&#10004;</h2>

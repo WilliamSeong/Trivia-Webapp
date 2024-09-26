@@ -10,7 +10,7 @@ const StyledA = Styled.a`
     border-radius: 15px;
 `;
 
-export default function Result({ correct, incorrect, review, results }) {
+export default function Result({ correct, incorrect, review, results, progress }) {
 
     const grade = correct/(correct+incorrect) * 100;
     console.log("review: ", { review });
@@ -24,7 +24,7 @@ export default function Result({ correct, incorrect, review, results }) {
             <StyledA href={"./App.jsx"}>Home</StyledA>
             <h1>Questions</h1>
 
-            <ResultCard review={review} results={results} />
+            <ResultCard review={review} results={results} progress={progress} />
         </>
 
     )
