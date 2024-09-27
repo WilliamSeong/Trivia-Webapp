@@ -1,6 +1,8 @@
 import he from "he";
 import {Fragment, useState} from "react";
 import Styled from "styled-components";
+import RedDot from "./assets/reddot.png"
+import GreenDot from "./assets/greendot.png"
 
 const StyledDiv = Styled.div`
     background-color: ${props => props.theme.colors};
@@ -44,21 +46,21 @@ export default function ResultCard ({review, results, progress}) {
                                         {(item === " X ") ? (
                                             <span style={{ display: "inline-block" }}>
                                                 &nbsp;
-                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png" alt="red dot" />
+                                                <img style={{ width: "2vw" }} src={RedDot} alt="red dot" />
                                                 &nbsp;
                                             </span>
                                         ) : (item === " ✓ ") ? (
-                                            <span style={{ display: "inline-block" }}>
+                                            <span style={{display: "inline-block"}}>
                                                 &nbsp;
-                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png" alt="green dot" />
+                                                <img style={{width: "2vw"}} src={GreenDot} alt="green dot"/>
                                                 &nbsp;
                                             </span>
                                         ) : (
-                                            <span style={{ display: "inline-block" }}>
+                                            <span style={{display: "inline-block"}}>
                                                 <h1>&nbsp;?&nbsp;</h1>
                                             </span>
                                         )}
-                                        {(index % 10 === 9) && <div style={{ clear: "both" }}></div>}
+                                        {(index % 10 === 9) && <div style={{clear: "both"}}></div>}
                                     </Fragment>
                                 ))
                             }
@@ -86,13 +88,13 @@ export default function ResultCard ({review, results, progress}) {
                                         {(item === " X ") ? (
                                             <span style={{ display: "inline-block" }}>
                                                 &nbsp;
-                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png" alt="red dot" />
+                                                <img style={{ width: "2vw" }} src={RedDot} alt="red dot" />
                                                 &nbsp;
                                             </span>
                                         ) : (item === " ✓ ") ? (
                                             <span style={{ display: "inline-block" }}>
                                                 &nbsp;
-                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png" alt="green dot" />
+                                                <img style={{ width: "2vw" }} src={GreenDot} alt="green dot" />
                                                 &nbsp;
                                             </span>
                                         ) : (

@@ -3,6 +3,8 @@ import {useState, useEffect, Fragment} from "react";
 import he from "he";
 import Result from "./Result";
 import Styled from "styled-components";
+import RedDot from "./assets/reddot.png"
+import GreenDot from "./assets/greendot.png"
 
 // const StyledPage = Styled.div`
 //     border-style: solid;
@@ -123,17 +125,17 @@ export default function Questions({list}) {
                             {/*<button onClick={() => setIndex(index + 1)}>Click Me</button> (Potential skip button)*/}
                             {
                                 progress.map((item, index) => (
-                                    <Fragment key={index} style={{margin: 0}}>
+                                    <Fragment key={index} >
                                         {(item === " X ") ? (
                                             <span style={{ display: "inline-block" }}>
                                                 &nbsp;
-                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Basic_red_dot.png" alt="red dot" />
+                                                <img style={{ width: "2vw" }} src={RedDot} alt="red dot" />
                                                 &nbsp;
                                             </span>
                                         ) : (item === " ✓ ") ? (
-                                            <span style={{ display: "inline-block" }}>
+                                            <span style={{display: "inline-block"}}>
                                                 &nbsp;
-                                                <img style={{ width: "2vw" }} src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Basic_green_dot.png" alt="green dot" />
+                                                <img style={{width: "2vw"}} src={GreenDot} alt="green dot"/>
                                                 &nbsp;
                                             </span>
                                         ) : (
