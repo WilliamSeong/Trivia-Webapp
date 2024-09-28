@@ -5,11 +5,9 @@ import Result from "./Result";
 import Styled from "styled-components";
 import RedDot from "./assets/reddot.png"
 import GreenDot from "./assets/greendot.png"
-
-// const StyledPage = Styled.div`
-//     border-style: solid;
-//     border-color: ${props => props.theme.colors};
-// `
+import {useSound} from "use-sound";
+import ding from "./assets/ding-101492.mp3";
+import dong from "./assets/wrong-47985.mp3"
 
 export default function Questions({list}) {
 
@@ -58,8 +56,12 @@ export default function Questions({list}) {
         setProgress(hold);
     }, [])
 
+    const [correctDing] = useSound(ding);
+    const [wrongDong] = useSound(dong);
+
     function correct_choice() {
         console.log("You clicked the correct answer");
+        correctDing();
         const item = list[index];
         // setState("#d3ffee")
         setProgress(prevProgress => {
@@ -75,6 +77,7 @@ export default function Questions({list}) {
 
     function incorrect_choice() {
         console.log("You clicked the wrong answer");
+        wrongDong();
         const item = list[index];
         // setState("#ffbfbf")
         setProgress(prevProgress => {
@@ -88,29 +91,8 @@ export default function Questions({list}) {
         setIndex(index+1);
     }
 
-    // function progress_update(res) {
-    //     if (res){
-    //
-    //     }
-    // }
-
-    // For printing the functionality of the buttons for registering correct or incorrect choices
-    // useEffect(() => {
-    //     console.log(correct, " correct so far");
-    //     console.log(incorrect, " incorrect so far");
-    // }, [correct, incorrect]);
-
-    // useEffect(() => {
-    //     const len = list.length;
-    //     for (let i = 0; i < len; i++) {
-    //         const item = list[i];
-    //         setReview(review => [...review, [item.question, item.correct_answer, item.incorrect_answers]]);
-    //     }
-    // },[])
-
     return(
         <div>
-            {/*theme = {{colors: state}}*/}
             {
                 loading ? (
                     <h1>Loading...</h1>

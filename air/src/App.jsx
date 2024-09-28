@@ -1,15 +1,19 @@
 import QuestionMenu from "./QuestionMenu.jsx";
 import Styled, {createGlobalStyle} from "styled-components";
+import {useState} from "react";
+import {useSound} from 'use-sound';
+import test from "./assets/Science Fiction/Science Fiction Sci-Fi Electronic Access Granted Tone 38.wav"
+
 
 
 
 const GlobalStyle = createGlobalStyle`
     :root {
-        --primary-color: black;
-        --secondary-color: #FFFFFF;
-        --background-color: #d4d9d9;
-        --button-bg: #61dafb;
-        --button-text: #282c34;
+        --primary-color: ${({ theme }) => theme.primaryColor};
+        --secondary-color: ${({ theme }) => theme.secondaryColor};
+        --background-color: ${({ theme }) => theme.backgroundColor};
+        --button-bg: ${({ theme }) => theme.buttonBg};
+        --button-text: ${({ theme }) => theme.buttonText};
     }
 
     body {
@@ -36,23 +40,53 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-// const StyledA = Styled.a`
-//     text-decoration: none;
-//     color: red;
-//     display: inline-block;
-//     margin-top: 20px;
-//     padding: 1vh 2vw;
-//     background-color: white;
-//     border-radius: 15px;
-// `;
+const lightTheme = {
+    primaryColor: 'black',
+    secondaryColor: '#FFFFFF',
+    backgroundColor: '#d4d9d9',
+    buttonBg: '#61dafb',
+    buttonText: '#282c34',
+};
+
+const darkTheme = {
+    primaryColor: '#FFFFFF',
+    secondaryColor: '#282c34',
+    backgroundColor: '#333',
+    buttonBg: '#282c34',
+    buttonText: '#61dafb',
+};
+
+// Add more themes as needed
+const pinkTheme = {
+    primaryColor: '#FF69B4',
+    secondaryColor: '#FFF5F7',
+    backgroundColor: '#FFD1DC',
+    buttonBg: '#FF69B4',
+    buttonText: '#282c34',
+};
 
 export default function App() {
 
+    const themes = [lightTheme, darkTheme, pinkTheme];
+    const [themeindex, setThemeindex] = useState(0)
+    const [theme, setTheme] = useState(themes[themeindex]);
+
+    const [play] = useSound(test);
+
+    const toggleTheme = () => {
+        play();
+        setThemeindex(prevThemeindex =>{
+            let nextIndex = (prevThemeindex + 1) % themes.length;
+            setTheme(themes[nextIndex])
+            return nextIndex
+        });
+    };
+
     return (
         <>
-            <GlobalStyle />
-            {/*<StyledA href={"./App.jsx"}>Quit</StyledA>*/}
-            <QuestionMenu />
+            <GlobalStyle theme={theme} />
+            <button onClick={toggleTheme}>Change Theme</button>
+            <QuestionMenu/>
         </>
     )
 }

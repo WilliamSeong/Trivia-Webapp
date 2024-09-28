@@ -2,6 +2,8 @@ import Dropdown from './DropdownMenu.jsx';
 import { useState } from "react";
 import Fetch from "./Fetch.jsx";
 import Styled from "styled-components";
+import {useSound} from "use-sound";
+import start from "./assets/Science Fiction/Science Fiction Sci-Fi Electronic Computer Processing Quick 27.wav"
 
 const StyledButton = Styled.button`
     width: 30vw;
@@ -67,6 +69,8 @@ export default function QuestionMenu(props) {
         "Entertainment: Cartoon & Animations": "32"
     }
 
+    const [playStart] = useSound(start);
+
     const handleSelect = (option, menuType) => {
         switch (menuType) {
             case "Category":
@@ -102,7 +106,10 @@ export default function QuestionMenu(props) {
                         <Dropdown options={difficulties} onSelect={handleSelect} menuType="Difficulty"/>
                         <Dropdown options={type} onSelect={handleSelect} menuType="Question Type"/>
                         <Dropdown options={amounts} onSelect={handleSelect} menuType="Amount"/>
-                        <StyledButton onClick={() => setMenu(false)}><StyledButtonText>Start</StyledButtonText></StyledButton>
+                        <StyledButton onClick={() => {
+                            setMenu(false);
+                            playStart();
+                        }}><StyledButtonText>Start</StyledButtonText></StyledButton>
                     </>
                 ) : (
                     <Fetch categoryid={categoryId} difficulty={difficulty} questiontype={questionType} amount={amount}/>

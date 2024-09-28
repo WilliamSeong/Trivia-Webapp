@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 // import { NavLink } from "react-router-dom";
 import he from "he";
 import Styled from "styled-components";
+import {useSound} from "use-sound";
+import hover from "./assets/Technology/Technology Electronic Button Beep Digital Camera 04.wav";
 
 const StyledLi = Styled.h5`
     list-style: none;
@@ -18,26 +20,9 @@ const StyledLi = Styled.h5`
 
 const StyledButton = Styled.button`
     margin: auto;
-    color: black;
     background-color: transparent;
     font-size: 3vw;
 `;
-
-// const StyledNavLink = Styled(NavLink)`
-//     text-decoration: none;
-//     font-size: 3vw;
-//     width: 40vw;
-//     color: #4CAF50;
-// `
-//
-// const StyledH1 = Styled.h1`
-//     text-decoration: none;
-//     font-size: 3vw;
-//     width: 40vw;
-//     color: #4CAF50;
-// `
-
-// This component is for listing the answer choices
 
 export default function List({ correct, incorrect, correct_choice, incorrect_choice }) {
     // Pass in props for the correct answer and the list of incorrect answers
@@ -63,6 +48,8 @@ export default function List({ correct, incorrect, correct_choice, incorrect_cho
 
     answers.sort(sortTwoArrays);
 
+    const [hoverAnswer] = useSound(hover);
+
     return(
 
         <>
@@ -71,9 +58,9 @@ export default function List({ correct, incorrect, correct_choice, incorrect_cho
                 // to the correct or incorrect variation of the results page
                 answers.map((answer, index) => (
                     answer[1] ? (
-                        <StyledLi key={index}><StyledButton onClick={correct_choice}>{ he.decode(answer[0]) }</StyledButton></StyledLi>
+                        <StyledLi key={index}><StyledButton onClick={correct_choice} onMouseEnter={() => hoverAnswer()}>{ he.decode(answer[0]) }</StyledButton></StyledLi>
                     ) : (
-                        <StyledLi key={index}><StyledButton onClick={incorrect_choice}>{he.decode(answer[0])}</StyledButton></StyledLi>
+                        <StyledLi key={index}><StyledButton onClick={incorrect_choice} onMouseEnter={() => hoverAnswer()}>{he.decode(answer[0])}</StyledButton></StyledLi>
                     )
                 ))
             }

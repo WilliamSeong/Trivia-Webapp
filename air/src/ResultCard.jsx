@@ -42,7 +42,7 @@ export default function ResultCard ({review, results, progress}) {
                         <div>
                             {
                                 progress.map((item, index) => (
-                                    <Fragment key={index} style={{margin: 0}}>
+                                    <Fragment key={index}>
                                         {(item === " X ") ? (
                                             <span style={{ display: "inline-block" }}>
                                                 &nbsp;
@@ -84,7 +84,7 @@ export default function ResultCard ({review, results, progress}) {
                         <div>
                             {
                                 progress.map((item, index) => (
-                                    <Fragment key={index} style={{margin: 0}}>
+                                    <Fragment key={index}>
                                         {(item === " X ") ? (
                                             <span style={{ display: "inline-block" }}>
                                                 &nbsp;
